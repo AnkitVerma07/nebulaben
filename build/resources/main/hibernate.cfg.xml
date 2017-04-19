@@ -1,0 +1,56 @@
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ 	   jdbc:postgresql://104.154.96.122/danStaging
+       external ip address: 104.154.96.122 internal ip address: 10.128.0.3-->
+    
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+ <property name="hibernate.connection.url">jdbc:postgresql://10.128.0.3/danStaging</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">madison91</property>   
+   	       <!--       <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</property>  
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">ankit</property>   --> 
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+       	<!-- <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
+       	<property name="hibernate.show_sql">true</property>
+       	<property name="hibernate.hbm2ddl.auto">update</property>
+       	<!-- all the entity classes -->
+       	<mapping class="careers.nebula.ben.db.enitity.User"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Locations"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Courses"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Coaches"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Companies"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Experiences"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Extracurricular"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Highschool"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Industry"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Interests"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Keywords"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Languages"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Locations"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Majors"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Minors"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Students"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Transfer"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Qualification"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Resume"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Transcript"/>
+       	<mapping class="careers.nebula.ben.db.enitity.TestResult"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Universities"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Colleges"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Analytics"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Jobs"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Interview"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Question"/>
+    </session-factory>
+</hibernate-configuration>
