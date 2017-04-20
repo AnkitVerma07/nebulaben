@@ -32,9 +32,9 @@ import careers.nebula.ben.pojos.StringArrayPojo;
  */
 public class DocumentInformation {
 
-	private String uploadFolder = "/Users/pinky/Documents/Nebula_Documents/Files/";
-	private String uploadResume = "/Users/pinky/Documents/Nebula_Documents/Resumes/";
-	private String uploadTranscript = "/Users/pinky/Documents/Nebula_Documents/Transcript/";
+	private String uploadFolder = "/Users/medlclouddev/Documents/Nebula_Documents/Files/";
+	private String uploadResume = "/Users/medlclouddev/Documents/Nebula_Documents/Resumes/";
+	private String uploadTranscript = "/Users/medlclouddev/Documents/Nebula_Documents/Transcript/";
 	private String filename = null;
 	private PDFParser parser;
 	private PDFTextStripper pdfStripper;
@@ -124,7 +124,7 @@ public class DocumentInformation {
 	
 	 public StringArrayPojo readDocxFile(String fileName) {
          List<XWPFParagraph> paragraphs = null;
-         String[] paras = null;
+         StringArrayPojo stringPojo = new StringArrayPojo();
          String temp = "";
 	try {
 		File file = new File(fileName);
@@ -132,19 +132,23 @@ public class DocumentInformation {
 
 		XWPFDocument document = new XWPFDocument(fis);
 		paragraphs = document.getParagraphs();
-		int i = 0;
 		for (XWPFParagraph para : paragraphs) {
 			temp = temp+para.getText();
-			paras[i] = para.getText();
-			i++;
+			
 		}
+		String[] paras = new String[paragraphs.size()];
+		for( int i =0; i < paragraphs.size(); i++){
+			String s = paragraphs.get(i).getText();
+			paras[i] = s;
+		}
+		
+		stringPojo.setA(paras);
+		stringPojo.setS(temp);
 		fis.close();
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
-	StringArrayPojo stringPojo = new StringArrayPojo();
-	stringPojo.setA(paras);
-	stringPojo.setS(temp);
+	
 	return stringPojo;
 	//return paras;
          //return temp;

@@ -22,6 +22,7 @@ import careers.nebula.ben.db.enitity.Experiences;
 import careers.nebula.ben.db.enitity.Extracurricular;
 import careers.nebula.ben.db.enitity.Industry;
 import careers.nebula.ben.db.enitity.Interests;
+import careers.nebula.ben.db.enitity.Jobs;
 import careers.nebula.ben.db.enitity.Keywords;
 import careers.nebula.ben.db.enitity.Languages;
 import careers.nebula.ben.db.enitity.Locations;
@@ -88,6 +89,16 @@ public class UserProfileRepo {
 		session.beginTransaction();
 		Query query = session.createQuery("from Experiences where job_title='"+ job_title +"'");
 		List<Experiences> expData = (List<Experiences>)query.list();
+		session.getTransaction().commit();
+		session.close();
+		session.getSessionFactory().close();
+		return expData;
+	}
+	
+	public List<Jobs> getJobsByTitle(String job_title){
+		session.beginTransaction();
+		Query query = session.createQuery("from Jobs where title='"+ job_title +"'");
+		List<Jobs> expData = (List<Jobs>)query.list();
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();
@@ -353,6 +364,16 @@ public class UserProfileRepo {
 		session.beginTransaction();
 		Query query = session.createQuery("from Experiences");
 		List<Experiences> expList = (List<Experiences>)query.list();
+		session.getTransaction().commit();
+		session.close();
+		session.getSessionFactory().close();
+		return expList;
+	}
+	
+	public List<Jobs> getAllJobsData(){
+		session.beginTransaction();
+		Query query = session.createQuery("from Jobs");
+		List<Jobs> expList = (List<Jobs>)query.list();
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();

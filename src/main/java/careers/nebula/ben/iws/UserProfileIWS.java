@@ -11,6 +11,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import careers.nebula.ben.information.ComparePeer2PeerInformation;
 import careers.nebula.ben.information.CourseSuggestionInformation;
+import careers.nebula.ben.information.JobSuggestionInformation;
+import careers.nebula.ben.pojos.RespondJobsCombinedList;
 import careers.nebula.ben.pojos.ResponseCombinedList;
 import careers.nebula.ben.pojos.TwoTestResultDataPojo;
 
@@ -23,6 +25,7 @@ public class UserProfileIWS {
 	
 	private ComparePeer2PeerInformation compareInfo;
 	private CourseSuggestionInformation courseSuggestion;
+	private JobSuggestionInformation jobSuggestion;
 	
 	@GET
 	@Path("/qualificationMajorExtra/{userId}")
@@ -1447,6 +1450,19 @@ public class UserProfileIWS {
 	public Response getCourseSuggestions(@PathParam("userId") int id){
 		courseSuggestion = new CourseSuggestionInformation();
 		ResponseCombinedList usersData = courseSuggestion.getGoalsType(id);
+		return Response.ok()
+				.entity(usersData)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();
+	}
+	
+	@GET
+	@Path("/jobSuggestion/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getJobSuggestions(@PathParam("userId") int id){
+		jobSuggestion = new JobSuggestionInformation();
+		RespondJobsCombinedList usersData = jobSuggestion.getGoalsType(id);
 		return Response.ok()
 				.entity(usersData)
 				.header("Access-Control-Allow-Origin", "*")

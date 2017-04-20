@@ -5,13 +5,20 @@ package careers.nebula.ben.information;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import careers.nebula.ben.db.enitity.Analytics;
+import careers.nebula.ben.db.enitity.Experiences;
+import careers.nebula.ben.db.enitity.Highschool;
+import careers.nebula.ben.db.enitity.Qualification;
 import careers.nebula.ben.db.enitity.User;
 import careers.nebula.ben.db.repository.UserRepo;
 import careers.nebula.ben.pojo.iws.AnalyticsDataPojo;
 import careers.nebula.ben.pojo.iws.UserDataPojo;
 import careers.nebula.ben.pojos.ResponseIntegerList;
+import careers.nebula.ben.pojos.TimelinePojo;
 import careers.nebula.ben.service.HelperMethods;
 
 /**
@@ -89,6 +96,35 @@ public class UserInformation {
 		userpojo.setHighestQualification(userEntity.getHighestQualification());
 		userpojo.setGender(userEntity.getGender());
 		return userpojo;
+	}
+	
+	public TimelinePojo getPrimaryUserTimelineInfo(int id){
+		TimelinePojo timeline = new TimelinePojo();
+		userRepo = new UserRepo();
+		userEntity = new User();
+		userEntity = userRepo.getUserData(id);
+		Collection<Experiences> expList = new ArrayList<Experiences>();
+		expList = userEntity.getExperienceList();
+		Collection<Qualification> qualList = new ArrayList<Qualification>();
+		qualList = userEntity.getUniversityList();
+		Collection<Highschool> hsList = new ArrayList<Highschool>();
+		hsList = userEntity.getHighschoolList();
+		Map<String, Experiences> expMap = new HashMap<String, Experiences>();
+		for(Experiences e : expList){
+			expMap.put(e.getStart_date(), e);
+		}
+		Map<String, Qualification> qualMap = new HashMap<String, Qualification>();
+		for(Qualification q : qualList){
+			qualMap.put(q.getYear_started(), q);
+		}
+		Map<String, Highschool> hsMap = new HashMap<String, Highschool>();
+		for(Highschool hs : hsList){
+			hsMap.put(hs.getYear_started(), hs);
+		}
+		timeline.setExpMap(expMap);
+		timeline.setHsMap(hsMap);
+		timeline.setQualMap(qualMap);
+		return timeline;
 	}
 	
 	public User UpdateUserInformation(UserDataPojo userData){

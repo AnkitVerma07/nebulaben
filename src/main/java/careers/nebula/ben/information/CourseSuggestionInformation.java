@@ -32,6 +32,13 @@ public class CourseSuggestionInformation {
 	private User userEntity;
 	private UserProfileRepo userpro;
 	
+	
+	//Goals type:
+	//1. I would like to MAJOR in.
+	//2. I would like to enroll in UNIVERSITY.
+	//3. I would like to pursue an experience in JOT TITLE.
+	//4. I would like to join COMPANY NAME for an experience.
+	//5. I would like to join the INDUSTRY for an experience. 
 	public ResponseCombinedList getGoalsType(int id){
 		ResponseCombinedList list = new ResponseCombinedList();
 		userEntity = new User();

@@ -165,8 +165,7 @@ private String KEYWORDS_CSV = "/Users/pinky/Documents/Nebula_Documents/Files/key
      String para = para1.toLowerCase();
      String tempExperience = "";
      Map<String, String> parsedata = new HashMap<String, String>();
-     Map<String, String> arrayParseData = new HashMap<String, String>();
-     Map<String, String> arrayParseInformation = new HashMap<String, String>();
+     Map<String, List<String>> arrayParseData = new HashMap<String, List<String>>();
      List<String> lookupList = new ArrayList<String>();
      List<Integer> foundList = new ArrayList<Integer>();
      List<Integer> arrayFoundList = new ArrayList<Integer>();
@@ -187,49 +186,75 @@ private String KEYWORDS_CSV = "/Users/pinky/Documents/Nebula_Documents/Files/key
      String[] split = para.split("\\s+");
      
 
-     //TODO break the resume into pieces
-     //TODO store into db
+     //ARRAY PARSING
      String[] paraText = sa.getA();
      for(int j = 0; j < lookupList.size(); j++){
     	 for(int i = 0; i < paraText.length; i++) {
 	    	 //s = s.replaceAll("\\s","");
 	    	 String s = paraText[i];
 	    	 s = s.toLowerCase();
-
 	        if(s.contains(lookupList.get(j))){
 	        	arrayFoundList.add(i);
-	        	Collections.sort(foundList);
-	        	arrayParseData.put(lookupList.get(j), s);
-	        	//System.out.println(i);
-		    	// System.out.println(s);
-			       // System.out.println(lookupList.get(j));	
+	        	Collections.sort(arrayFoundList);
 	        }
+     	} 
+     }
+     
+     int first = 0; 
+     	List<String> InformationArray2 = new ArrayList<String>();
+     	String s2 = "";
+     	for(int j = first; j < arrayFoundList.get(0); j++){
+     		s2 = paraText[j];
+     		InformationArray2.add(s2);    		
      	}
-    	 
-     }
-
-     for(int j = 0; j < lookupList.size(); j++){
-	     for(int i = 0; i < arrayFoundList.size(); i++){
-	    	 int present = arrayFoundList.get(i);
-	    	 int next = arrayFoundList.get(i+1);
-	    	 arrayParseInformation.put(lookupList.get(j), paraText[present]+paraText[next]);
-	    	 
-//	         int length = first.length + second.length;
-//	         String[] result = new String[length];
-//	         System.arraycopy(first, 0, result, 0, first.length);
-//	         System.arraycopy(second, 0, result, first.length, second.length);
-//	         return result;
-	         
-	         
-	    	 System.out.println(paraText[present]+paraText[next]+"::::");
-	     }
-     }
+ 	arrayParseData.put("basic", InformationArray2);
      
-     //now you have arrayFoundList with all the index values of found list.
-     //arrayParseData map has key lookuplist value and value as resume array string
-     //String arrayParseData.key = foundList.get(key) + foundList.get(key+1)
+    int start = 1; 
+    for(int i =0; i < arrayFoundList.size(); i++){
+    	List<String> InformationArray1 = new ArrayList<String>();
+    	String s = "";
+    	for(int j = start; j < arrayFoundList.get(i); j++){
+    		s = paraText[j];
+    		InformationArray1.add(s);    		
+    	}
+    	 for(int j = 0; j < lookupList.size(); j++){
+    		 String s1 = paraText[start];
+	    	 s1 = s1.toLowerCase();
+	    	 if(s1.contains(lookupList.get(j))){
+	    		 arrayParseData.put(lookupList.get(j), InformationArray1);
+	    	 }
+    	 }
+    	
+    	start = arrayFoundList.get(i);
+    }
+    int end = arrayFoundList.get(arrayFoundList.size()-1);
+    String lastS = "";
+    List<String> InformationArray = new ArrayList<String>();
+    for(int z = end; z < paraText.length; z++){
+    	lastS = paraText[z];
+    	InformationArray.add(lastS);
+    }
+	 for(int j = 0; j < lookupList.size(); j++){
+		 String s1 = paraText[end];
+    	 s1 = s1.toLowerCase();
+    	 if(s1.contains(lookupList.get(j))){
+    		 arrayParseData.put(lookupList.get(j), InformationArray);
+    	 }
+	 }
 
-     
+      for (String name: arrayParseData.keySet()){
+    	
+    	         String key =name.toString();
+    	         List<String> value = arrayParseData.get(name);  
+    	         for(String s : value){
+    	        		 System.out.println("<" + key + ">" + "  :::  " + "[" + s + "]");  
+    	         }
+    	        
+    	
+    	
+    	     } 
+
+     //STRING PARSING
      for(int i =0; i <= split.length-1; i++){
     	 for(int j = 0; j < lookupList.size(); j++){
     		if(para.contains(lookupList.get(j))){
@@ -247,12 +272,7 @@ private String KEYWORDS_CSV = "/Users/pinky/Documents/Nebula_Documents/Files/key
              j--; 
              size--;
          } 
-     } 
-     
-//     for(Integer i : foundList){
-//    	 System.out.println(i);
-//    	 System.out.println(para.substring(i, i+10));
-//     }
+     }
 
      for(int i=0; i<foundList.size()-1; i++){
     	 if(!foundList.get(i+1).equals(null)){

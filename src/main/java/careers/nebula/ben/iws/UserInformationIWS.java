@@ -19,6 +19,7 @@ import careers.nebula.ben.information.UserInformation;
 import careers.nebula.ben.pojo.iws.AnalyticsDataPojo;
 import careers.nebula.ben.pojo.iws.UserDataPojo;
 import careers.nebula.ben.pojos.ResponseIntegerList;
+import careers.nebula.ben.pojos.TimelinePojo;
 
 /**
  * @author Ankit_Nebula
@@ -49,6 +50,19 @@ public class UserInformationIWS {
 	public Response locateUserById (@PathParam("userId") int id){
 		userInformation = new UserInformation();
 		UserDataPojo userById = userInformation.getPrimaryUserInfo(id);
+		return Response.ok()
+				.entity(userById)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();
+	}
+	
+	@GET
+	@Path("/getUserTImeline/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buildUserTimeline (@PathParam("userId") int id){
+		userInformation = new UserInformation();
+		TimelinePojo userById = userInformation.getPrimaryUserTimelineInfo(id);
 		return Response.ok()
 				.entity(userById)
 				.header("Access-Control-Allow-Origin", "*")
