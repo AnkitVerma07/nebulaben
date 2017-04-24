@@ -20,6 +20,15 @@
         <servlet-name>Jersey Web Application</servlet-name>
         <url-pattern>/benapi/*</url-pattern>
     </servlet-mapping>
+     <filter>
+        <filter-name>cross-origin</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.CrossOriginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>cross-origin</filter-name>
+        <url-pattern>/benapi/*</url-pattern>
+    </filter-mapping>
+
     
 <!--       <welcome-file-list>
         <welcome-file>nebula_fe/dist/index.html</welcome-file>

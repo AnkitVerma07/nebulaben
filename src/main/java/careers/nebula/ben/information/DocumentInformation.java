@@ -32,8 +32,8 @@ import careers.nebula.ben.pojos.StringArrayPojo;
  */
 public class DocumentInformation {
 
-	private String uploadFolder = "/Users/medlclouddev/Documents/Nebula_Documents/Files/";
-	private String uploadResume = "/Users/medlclouddev/Documents/Nebula_Documents/Resumes/";
+	private String uploadFolder = "/Users/pinky/Documents/Nebula_Documents/Files/";
+	private String uploadResume = "/Users/pinky/Documents/Nebula_Documents/Resumes/";
 	private String uploadTranscript = "/Users/medlclouddev/Documents/Nebula_Documents/Transcript/";
 	private String filename = null;
 	private PDFParser parser;

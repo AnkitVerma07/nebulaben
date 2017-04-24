@@ -36,6 +36,7 @@ public class UserInformationIWS {
 	@Path("/insertUser")
 	public Response userInformationPojo (UserDataPojo userData){
 		userInformation = new UserInformation();
+		System.out.println(userData.getEmail());
 		User insertUser = userInformation.InsertPrimaryUserInfo(userData);
 		return Response.ok()
 				.entity(insertUser)
@@ -58,7 +59,7 @@ public class UserInformationIWS {
 	}
 	
 	@GET
-	@Path("/getUserTImeline/{userId}")
+	@Path("/getUserTimeline/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buildUserTimeline (@PathParam("userId") int id){
 		userInformation = new UserInformation();
