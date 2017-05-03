@@ -53,6 +53,7 @@ public class User {
 	private String locale;
 	private String twitter_info;
 	private Integer age;
+	private String hashed_password;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_locations",
@@ -454,6 +455,12 @@ public class User {
 	}
 	public void setUserInterviews(Collection<Interview> userInterviews) {
 		this.userInterviews = userInterviews;
+	}
+	public String getHashed_password() {
+		return hashed_password;
+	}
+	public void setHashed_password(String hashed_password) {
+		this.hashed_password = hashed_password;
 	}
 
 	

@@ -56,6 +56,7 @@ public class UserDataPojo {
 	private String dob;
 	private String gender;
 	private Integer age;
+	private String hashed_password;
 	private Collection<Locations> locationList = new ArrayList<Locations>();
 	private Collection<Highschool> highschoolList = new ArrayList<Highschool>();
 	private Collection<Qualification> qualificationList = new ArrayList<Qualification>();
@@ -81,10 +82,11 @@ public class UserDataPojo {
 		
 	}
 	
-	public UserDataPojo(Integer id, String gender, Integer age, String dob, String firstName, String lastName, String preferredName, String phoneNumber, String email, String photoUrl, String videoUrl, String personalWebsiteUrl, String fb_info, String twitter_info, String locale, String goals, String aboutMe, Boolean currentlyEmployeed, Boolean currentlyInSchool, String highestQualification, Double user_rating, Boolean active, Collection<Locations> locationList, Collection<Highschool> highschoolList, Collection<Qualification> qualificationList, Collection<Keywords> keywordList, Collection<Experiences> experienceList, Collection<Coaches> coachList, Collection<Students> studentList, Collection<Extracurricular> extracurricularList, Collection<Resume> resumeList , Collection<Transcript> transcriptList, Collection<Languages> languageList , Collection<Interests> interestList,Collection<Industry> industryList, Collection<TestResult> testList, Collection<Analytics> analyticsList, Boolean student, Boolean coach, Collection<Jobs> jobsApplied, Collection<Jobs> jobsQualified, Collection<Jobs> jobsSaved, Collection<Jobs> jobsReferred, Collection<Interview> userInterviews){
+	public UserDataPojo(String hashed_password, Integer id, String gender, Integer age, String dob, String firstName, String lastName, String preferredName, String phoneNumber, String email, String photoUrl, String videoUrl, String personalWebsiteUrl, String fb_info, String twitter_info, String locale, String goals, String aboutMe, Boolean currentlyEmployeed, Boolean currentlyInSchool, String highestQualification, Double user_rating, Boolean active, Collection<Locations> locationList, Collection<Highschool> highschoolList, Collection<Qualification> qualificationList, Collection<Keywords> keywordList, Collection<Experiences> experienceList, Collection<Coaches> coachList, Collection<Students> studentList, Collection<Extracurricular> extracurricularList, Collection<Resume> resumeList , Collection<Transcript> transcriptList, Collection<Languages> languageList , Collection<Interests> interestList,Collection<Industry> industryList, Collection<TestResult> testList, Collection<Analytics> analyticsList, Boolean student, Boolean coach, Collection<Jobs> jobsApplied, Collection<Jobs> jobsQualified, Collection<Jobs> jobsSaved, Collection<Jobs> jobsReferred, Collection<Interview> userInterviews){
 		this.id = id;
 		this.dob = dob;
 		this.age = age;
+		this.hashed_password = hashed_password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.preferredName = preferredName;
@@ -450,6 +452,14 @@ public class UserDataPojo {
 
 	public void setUserInterviews(Collection<Interview> userInterviews) {
 		this.userInterviews = userInterviews;
+	}
+
+	public String getHashed_password() {
+		return hashed_password;
+	}
+
+	public void setHashed_password(String hashed_password) {
+		this.hashed_password = hashed_password;
 	}
 	
 	

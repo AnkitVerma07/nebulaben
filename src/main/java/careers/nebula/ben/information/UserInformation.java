@@ -42,6 +42,7 @@ public class UserInformation {
 		}	
 		userEntity.setFirstName(userData.getFirstName());
 		userEntity.setLastName(userData.getLastName());
+		userEntity.setHashed_password(userData.getHashed_password());
 		userEntity.setPreferredName(userData.getPreferredName());
 		userEntity.setPhoneNumber(userData.getPhoneNumber());
 		userEntity.setEmail(userData.getEmail());
@@ -337,5 +338,22 @@ public class UserInformation {
 		userRepo = new UserRepo();
 		userRepo.updateAnalyticsData(analyticsEntity);
 		return analyticsEntity;
+	}
+
+	public User checkUserLogin(String email, String password) {
+		userEntity = new User();
+		userRepo = new UserRepo();
+		List<User> userData = new ArrayList<User>();
+		
+		userData = userRepo.LocateUserByEmail(email);
+		if(userData.isEmpty()){
+			System.out.println("error no user found by given email");
+		}
+		if(userData.get(0).getHashed_password().equals(password)){
+			return userData.get(0);
+		} else {
+			System.out.println("return error wrong password");
+		}
+		return userEntity;
 	}
 }
