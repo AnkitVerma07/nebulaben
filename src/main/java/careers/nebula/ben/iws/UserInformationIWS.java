@@ -59,6 +59,22 @@ public class UserInformationIWS {
 	}
 	
 	@GET
+<<<<<<< HEAD
+=======
+	@Path("/validateLogin/{email}/{password}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response validateLogin (@PathParam("email") String email, @PathParam("password") String password){
+		userInformation = new UserInformation();
+		User userById = userInformation.checkUserLogin(email, password);
+		return Response.ok()
+				.entity(userById)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();
+	}
+	
+	@GET
+>>>>>>> 27fc29d1004dbbe8c401ca3e869a36966a47cfee
 	@Path("/getUserTimeline/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buildUserTimeline (@PathParam("userId") int id){
