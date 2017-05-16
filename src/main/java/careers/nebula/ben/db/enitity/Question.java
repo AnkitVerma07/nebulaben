@@ -28,6 +28,7 @@ public class Question {
     @Column(name = "id", columnDefinition = "serial")
 	private Integer id;
 	private String question;
+	private Boolean current_type;
 	private String answer;
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
