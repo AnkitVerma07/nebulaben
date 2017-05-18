@@ -20,12 +20,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
- * @author Ankit Verma
+ * @author medlclouddev
  *
  */
 @Entity
-@Table (name = "surveys")
-public class Survey {
+@Table (name = "assestments")
+public class Assestment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", columnDefinition = "serial")
@@ -38,11 +38,11 @@ public class Survey {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	private SurveyTaken surveyTaken;
+	private AssestmentTaken assestmentTaken;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="survey_questions",
-			joinColumns=@JoinColumn(name="survey_id"), 
+	@JoinTable(name="assestment_questions",
+			joinColumns=@JoinColumn(name="assestment_id"), 
 			inverseJoinColumns=@JoinColumn(name="question_id")
 	)
 	private Collection<Question> questionList = new ArrayList<Question>();
@@ -95,12 +95,12 @@ public class Survey {
 		this.expected_time = expected_time;
 	}
 
-	public SurveyTaken getSurveyTaken() {
-		return surveyTaken;
+	public AssestmentTaken getAssestmentTaken() {
+		return assestmentTaken;
 	}
 
-	public void setSurveyTaken(SurveyTaken surveyTaken) {
-		this.surveyTaken = surveyTaken;
+	public void setAssestmentTaken(AssestmentTaken assestmentTaken) {
+		this.assestmentTaken = assestmentTaken;
 	}
 
 	public Collection<Question> getQuestionList() {

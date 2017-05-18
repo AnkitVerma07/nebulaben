@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,11 +29,20 @@ public class Question {
     @Column(name = "id", columnDefinition = "serial")
 	private Integer id;
 	private String question;
-	private Boolean current_type;
-	private String answer;
+	private String type;  //positive or negative
+	private ArrayList<String> choices;
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
+	private Collection<Answer> answersList = new ArrayList<Answer>();
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
 	private Collection<Interview> interviewList = new ArrayList<Interview>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
+	private Collection<Survey> surveyList = new ArrayList<Survey>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
+	private Collection<Assestment> assestmentList = new ArrayList<Assestment>();
 
 	public Integer getId() {
 		return id;
@@ -50,20 +60,52 @@ public class Question {
 		this.question = question;
 	}
 
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-
 	public Collection<Interview> getInterviewList() {
 		return interviewList;
 	}
 
 	public void setInterviewList(Collection<Interview> interviewList) {
 		this.interviewList = interviewList;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public ArrayList<String> getChoices() {
+		return choices;
+	}
+
+	public void setChoices(ArrayList<String> choices) {
+		this.choices = choices;
+	}
+
+	public Collection<Answer> getAnswersList() {
+		return answersList;
+	}
+
+	public void setAnswersList(Collection<Answer> answersList) {
+		this.answersList = answersList;
+	}
+
+	public Collection<Survey> getSurveyList() {
+		return surveyList;
+	}
+
+	public void setSurveyList(Collection<Survey> surveyList) {
+		this.surveyList = surveyList;
+	}
+
+	public Collection<Assestment> getAssestmentList() {
+		return assestmentList;
+	}
+
+	public void setAssestmentList(Collection<Assestment> assestmentList) {
+		this.assestmentList = assestmentList;
 	}
 
 	

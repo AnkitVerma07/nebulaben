@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -54,6 +55,14 @@ public class User {
 	private String twitter_info;
 	private Integer age;
 	private String hashed_password;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private SurveyTaken surveyTaken;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private AssestmentTaken assestmentTaken;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_locations",
@@ -461,6 +470,18 @@ public class User {
 	}
 	public void setHashed_password(String hashed_password) {
 		this.hashed_password = hashed_password;
+	}
+	public SurveyTaken getSurveyTaken() {
+		return surveyTaken;
+	}
+	public void setSurveyTaken(SurveyTaken surveyTaken) {
+		this.surveyTaken = surveyTaken;
+	}
+	public AssestmentTaken getAssestmentTaken() {
+		return assestmentTaken;
+	}
+	public void setAssestmentTaken(AssestmentTaken assestmentTaken) {
+		this.assestmentTaken = assestmentTaken;
 	}
 
 	
