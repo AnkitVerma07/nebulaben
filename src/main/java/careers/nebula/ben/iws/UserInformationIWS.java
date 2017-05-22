@@ -36,7 +36,6 @@ public class UserInformationIWS {
 	@Path("/insertUser")
 	public Response userInformationPojo (UserDataPojo userData){
 		userInformation = new UserInformation();
-		System.out.println(userData.getEmail());
 		User insertUser = userInformation.InsertPrimaryUserInfo(userData);
 		return Response.ok()
 				.entity(insertUser)

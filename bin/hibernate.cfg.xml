@@ -54,5 +54,10 @@
        	<mapping class="careers.nebula.ben.db.enitity.Jobs"/>
        	<mapping class="careers.nebula.ben.db.enitity.Interview"/>
        	<mapping class="careers.nebula.ben.db.enitity.Question"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Survey"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Answer"/>
+       	<mapping class="careers.nebula.ben.db.enitity.Assestment"/>
+       	<mapping class="careers.nebula.ben.db.enitity.AssestmentTaken"/>
+       	<mapping class="careers.nebula.ben.db.enitity.SurveyTaken"/>
     </session-factory>
 </hibernate-configuration>

@@ -8,7 +8,10 @@ import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import careers.nebula.ben.db.enitity.Answer;
+import careers.nebula.ben.db.enitity.Assestment;
 import careers.nebula.ben.db.enitity.Interview;
+import careers.nebula.ben.db.enitity.Survey;
 
 /**
  * @author Ankit_Nebula
@@ -18,18 +21,27 @@ import careers.nebula.ben.db.enitity.Interview;
 public class QuestionDataPojo {
 	private Integer id;
 	private String question;
-	private String answer;
+	private String type;
+	private ArrayList<String> choices;
 	private Collection<Interview> interviewList = new ArrayList<Interview>();
+	private Collection<Answer> answersList = new ArrayList<Answer>();
+	private Collection<Survey> surveyList = new ArrayList<Survey>();
+	private Collection<Assestment> assestmentList = new ArrayList<Assestment>();
+
 	
 	public QuestionDataPojo(){
 		
 	}
 	
-	public QuestionDataPojo(Integer id, String question, String answer, Collection<Interview> interviewList){
+	public QuestionDataPojo(Integer id, String question, String type, Collection<Interview> interviewList, ArrayList<String> choices, Collection<Answer> answersList, Collection<Survey> surveyList, Collection<Assestment> assestmentList){
 		this.id = id;
 		this.question = question;
-		this.answer = answer;
+		this.type = type;
 		this.interviewList = interviewList;
+		this.choices = choices;
+		this.answersList = answersList;
+		this.surveyList = surveyList;
+		this.assestmentList = assestmentList;
 	}
 
 	public Integer getId() {
@@ -48,12 +60,20 @@ public class QuestionDataPojo {
 		this.question = question;
 	}
 
-	public String getAnswer() {
-		return answer;
+	public String getType() {
+		return type;
 	}
 
-	public void setAnswer(String answer) {
-		this.answer = answer;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public ArrayList<String> getChoices() {
+		return choices;
+	}
+
+	public void setChoices(ArrayList<String> choices) {
+		this.choices = choices;
 	}
 
 	public Collection<Interview> getInterviewList() {
@@ -63,6 +83,32 @@ public class QuestionDataPojo {
 	public void setInterviewList(Collection<Interview> interviewList) {
 		this.interviewList = interviewList;
 	}
+
+	public Collection<Answer> getAnswersList() {
+		return answersList;
+	}
+
+	public void setAnswersList(Collection<Answer> answersList) {
+		this.answersList = answersList;
+	}
+
+	public Collection<Survey> getSurveyList() {
+		return surveyList;
+	}
+
+	public void setSurveyList(Collection<Survey> surveyList) {
+		this.surveyList = surveyList;
+	}
+
+	public Collection<Assestment> getAssestmentList() {
+		return assestmentList;
+	}
+
+	public void setAssestmentList(Collection<Assestment> assestmentList) {
+		this.assestmentList = assestmentList;
+	}
+
+
 	
 	
 }

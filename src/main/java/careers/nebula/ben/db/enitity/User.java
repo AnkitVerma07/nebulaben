@@ -56,9 +56,13 @@ public class User {
 	private Integer age;
 	private String hashed_password;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private SurveyTaken surveyTaken;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="user_survey_taken",
+			joinColumns=@JoinColumn(name="user_id"), 
+			inverseJoinColumns=@JoinColumn(name="survey_taken")
+	)
+	private Collection<SurveyTaken> surveyTakenList = new ArrayList<SurveyTaken>();
+	
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -471,11 +475,12 @@ public class User {
 	public void setHashed_password(String hashed_password) {
 		this.hashed_password = hashed_password;
 	}
-	public SurveyTaken getSurveyTaken() {
-		return surveyTaken;
+
+	public Collection<SurveyTaken> getSurveyTakenList() {
+		return surveyTakenList;
 	}
-	public void setSurveyTaken(SurveyTaken surveyTaken) {
-		this.surveyTaken = surveyTaken;
+	public void setSurveyTakenList(Collection<SurveyTaken> surveyTakenList) {
+		this.surveyTakenList = surveyTakenList;
 	}
 	public AssestmentTaken getAssestmentTaken() {
 		return assestmentTaken;

@@ -1,55 +1,44 @@
-/**
- * 
- */
-package careers.nebula.ben.db.enitity;
+package careers.nebula.ben.pojo.iws;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import careers.nebula.ben.db.enitity.Question;
+import careers.nebula.ben.db.enitity.SurveyTaken;
 
 /**
- * @author Ankit Verma
+ * @author Ankit_Nebula
  *
  */
-@Entity
-@Table (name = "surveys")
-public class Survey {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", columnDefinition = "serial")
+@XmlRootElement
+public class SurveyDataPojo {
+	
 	private Integer id;
 	private String title;
 	private String description;
 	private String source;
 	private Double time_limit;
 	private Double expected_time;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="survey_surveys_taken",
-			joinColumns=@JoinColumn(name="survey_id"), 
-			inverseJoinColumns=@JoinColumn(name="survey_taken_id")
-	)
 	private Collection<SurveyTaken> surveyTakenList = new ArrayList<SurveyTaken>();
+	private Collection<Question> questionList = new ArrayList<Question>();
 
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="survey_questions",
-			joinColumns=@JoinColumn(name="survey_id"), 
-			inverseJoinColumns=@JoinColumn(name="question_id")
-	)
-	private Collection<Question> questionList = new ArrayList<Question>();
+	public SurveyDataPojo() {
+		
+	}
+	
+	public SurveyDataPojo(Integer id, String title, String description, String source, Double time_limit, Double expected_time, Collection<SurveyTaken> surveyTakenList, Collection<Question> questionList) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.source = source;
+		this.time_limit = time_limit;
+		this.expected_time = expected_time;
+		this.surveyTakenList = surveyTakenList;
+		this.questionList = questionList;
+	}
 
 	public Integer getId() {
 		return id;
@@ -100,6 +89,7 @@ public class Survey {
 	}
 
 
+
 	public Collection<SurveyTaken> getSurveyTakenList() {
 		return surveyTakenList;
 	}
@@ -115,6 +105,9 @@ public class Survey {
 	public void setQuestionList(Collection<Question> questionList) {
 		this.questionList = questionList;
 	}
+	
+	
+	
 	
 	
 }

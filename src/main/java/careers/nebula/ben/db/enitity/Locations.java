@@ -46,6 +46,9 @@ public class Locations {
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "locationList", cascade = CascadeType.ALL)
 	private Collection<Companies> companyList = new ArrayList<Companies>();
 	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "locationList", cascade = CascadeType.ALL)
+	private Collection<SurveyTaken> surveyTakenList = new ArrayList<SurveyTaken>();
+	
 //	@OneToOne(cascade=CascadeType.ALL, mappedBy="location")
 //	private Jobs jobLocation = new Jobs();
 	

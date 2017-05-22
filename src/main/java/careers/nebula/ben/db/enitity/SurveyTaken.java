@@ -32,11 +32,13 @@ public class SurveyTaken {
 	private Integer id;
 	private Double time_taken;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "surveyTaken", cascade = CascadeType.ALL)
-	private Survey survey;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "surveyTaken", cascade = CascadeType.ALL)
-	private User user;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "surveyTakenList", cascade = CascadeType.ALL)
+	private Collection<Survey> surveyList = new ArrayList<Survey>();
+	
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "surveyTakenList", cascade = CascadeType.ALL)
+	private Collection<User> usersList = new ArrayList<User>();
+	
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="survey_taken_answers",
@@ -44,6 +46,13 @@ public class SurveyTaken {
 			inverseJoinColumns=@JoinColumn(name="answer_id")
 	)
 	private Collection<Answer> answersList = new ArrayList<Answer>();
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="survey_taken_location",
+			joinColumns=@JoinColumn(name="survey_taken_id"), 
+			inverseJoinColumns=@JoinColumn(name="location_id")
+	)
+	private Collection<Locations> locationList = new ArrayList<Locations>();
 
 	public Integer getId() {
 		return id;
@@ -61,20 +70,30 @@ public class SurveyTaken {
 		this.time_taken = time_taken;
 	}
 
-	public Survey getSurvey() {
-		return survey;
+
+
+	public Collection<Survey> getSurveyList() {
+		return surveyList;
 	}
 
-	public void setSurvey(Survey survey) {
-		this.survey = survey;
+	public void setSurveyList(Collection<Survey> surveyList) {
+		this.surveyList = surveyList;
 	}
 
-	public User getUser() {
-		return user;
+	public Collection<User> getUsersList() {
+		return usersList;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsersList(Collection<User> usersList) {
+		this.usersList = usersList;
+	}
+
+	public Collection<Locations> getLocationList() {
+		return locationList;
+	}
+
+	public void setLocationList(Collection<Locations> locationList) {
+		this.locationList = locationList;
 	}
 
 	public Collection<Answer> getAnswersList() {
