@@ -14,6 +14,7 @@ import careers.nebula.ben.db.enitity.Companies;
 import careers.nebula.ben.db.enitity.Highschool;
 import careers.nebula.ben.db.enitity.Locations;
 import careers.nebula.ben.db.enitity.Qualification;
+import careers.nebula.ben.db.enitity.SurveyTaken;
 import careers.nebula.ben.db.enitity.User;
 import careers.nebula.ben.pojo.iws.LocationDataPojo;
 import careers.nebula.ben.pojos.HighSchoolLocationPojo;
@@ -47,6 +48,15 @@ public class LocationRepo {
 				session.close();
 				session.getSessionFactory().close();
 			   }
+	
+	public void insertSurveyTakenLocation(SurveyTaken surveyTaken, Locations location){
+		session.beginTransaction();			
+		session.save(location);
+		session.merge(surveyTaken); 
+		session.getTransaction().commit();
+		session.close();
+		session.getSessionFactory().close();
+	   }
 
 	public void updateLocationData(Locations locationData){
 		session.beginTransaction();

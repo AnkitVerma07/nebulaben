@@ -5,16 +5,24 @@ package careers.nebula.ben.information;
 
 import java.util.List;
 
+import careers.nebula.ben.db.enitity.Answer;
+import careers.nebula.ben.db.enitity.Locations;
 import careers.nebula.ben.db.enitity.Question;
 import careers.nebula.ben.db.enitity.Survey;
+import careers.nebula.ben.db.enitity.SurveyTaken;
 import careers.nebula.ben.db.enitity.User;
+import careers.nebula.ben.db.repository.AnswerRepo;
+import careers.nebula.ben.db.repository.LocationRepo;
 import careers.nebula.ben.db.repository.QuestionRepo;
 import careers.nebula.ben.db.repository.SurveyRepo;
+import careers.nebula.ben.db.repository.SurveyTakenRepo;
 import careers.nebula.ben.db.repository.UserRepo;
 import careers.nebula.ben.pojo.iws.QuestionDataPojo;
 import careers.nebula.ben.pojo.iws.SurveyDataPojo;
 import careers.nebula.ben.pojo.iws.UserDataPojo;
+import careers.nebula.ben.pojos.IntegerStringDataPojo;
 import careers.nebula.ben.pojos.QuestionArrayDataPojo;
+import careers.nebula.ben.pojos.SurveyTakenDataPojo;
 import careers.nebula.ben.service.HelperMethods;
 
 /**
@@ -24,12 +32,19 @@ import careers.nebula.ben.service.HelperMethods;
 public class SurveyInformation {
 
 	private Survey surveyEntity;
+	private Locations locationEntity;
 	private Question questionEntity;
 	private HelperMethods methods;
 	private SurveyRepo surveyRepo;
+	private LocationRepo locationRepo;
 	private QuestionRepo questionRepo;
 	private SurveyDataPojo surveyPojo;
-	
+	private SurveyTaken surveyTakenEntity;
+	private SurveyTakenRepo surveyTakenRepo;
+	private UserRepo userRepo;
+	private User userEntity;
+	private Answer answerEntity;
+	private AnswerRepo answerRepo;
 	
 	public Survey addSurvey(SurveyDataPojo surveyData){	
 		surveyEntity = new Survey();
@@ -113,6 +128,45 @@ public class SurveyInformation {
 			questionRepo.insertQuestion(surveyEntity, questionEntity);
 		}
 		return returnObject;
+	}
+	
+	public SurveyTaken addSurveyTaken(int userId, int surveyId, SurveyTakenDataPojo surveyTakenData){	
+		surveyRepo = new SurveyRepo();
+		surveyEntity = new Survey();
+		surveyEntity = surveyRepo.getSurveyById(surveyId);
+		userRepo = new UserRepo();
+		userEntity = new User();
+		userEntity = userRepo.getUserData(userId);
+		surveyTakenEntity = new SurveyTaken();
+		surveyTakenEntity.setTime_taken(surveyTakenData.getTime_taken());
+		userEntity.getSurveyTakenList().add(surveyTakenEntity);
+		surveyEntity.getSurveyTakenList().add(surveyTakenEntity);
+		surveyTakenRepo = new SurveyTakenRepo();
+		surveyTakenRepo.insertSurveyTaken(surveyTakenEntity,userEntity, surveyEntity);
+		locationEntity = new Locations();
+		locationEntity.setStreet_address1(surveyTakenData.getStreet_address1());
+		locationEntity.setStreet_address2(surveyTakenData.getStreet_address2());
+		locationEntity.setCity(surveyTakenData.getCity());
+		locationEntity.setCountry(surveyTakenData.getCountry());
+		locationEntity.setState(surveyTakenData.getState());
+		locationEntity.setZipcode(surveyTakenData.getZipcode());
+		surveyTakenEntity.getLocationList().add(locationEntity);
+		locationRepo = new LocationRepo();
+		locationRepo.insertSurveyTakenLocation(surveyTakenEntity, locationEntity);
+		for(IntegerStringDataPojo twoStringPojo: surveyTakenData.getAnswersList()){
+			questionEntity = new Question();
+			questionRepo = new QuestionRepo();
+			questionEntity = questionRepo.getQuestionById(twoStringPojo.getI());
+			answerEntity.setText(twoStringPojo.getS());
+			answerEntity.getQuestionList().add(questionEntity);
+			surveyTakenEntity.getAnswersList().add(answerEntity);
+			answerRepo = new AnswerRepo();
+			answerRepo.insertAnswer(answerEntity, surveyTakenEntity);
+		}
+		surveyTakenEntity = new SurveyTaken();
+		surveyTakenRepo = new SurveyTakenRepo();
+		surveyTakenEntity = surveyTakenRepo.getSurveyTakenById(surveyId);
+		return surveyTakenEntity;
 	}
 	
 

@@ -14,12 +14,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import careers.nebula.ben.db.enitity.Survey;
+import careers.nebula.ben.db.enitity.SurveyTaken;
 import careers.nebula.ben.db.enitity.User;
 import careers.nebula.ben.information.SurveyInformation;
 import careers.nebula.ben.information.UserInformation;
 import careers.nebula.ben.pojo.iws.SurveyDataPojo;
 import careers.nebula.ben.pojo.iws.UserDataPojo;
 import careers.nebula.ben.pojos.QuestionArrayDataPojo;
+import careers.nebula.ben.pojos.SurveyTakenDataPojo;
 
 /**
  * @author Ankit Verma
@@ -80,6 +82,21 @@ public class SurveyInformationIWS {
 		QuestionArrayDataPojo questionsAdded = surveyInformation.addSurveyQuestions(id, questionsArray);
 		return Response.ok()
 				.entity(questionsAdded)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();
+	}
+
+	
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{userId}/surveyTaken/{surveyId}")
+	public Response insertSurveyQuestions (@PathParam("userId") int userId, @PathParam("surveyId") int surveyId, SurveyTakenDataPojo surveyTakenData){
+		surveyInformation = new SurveyInformation();
+		SurveyTaken surveyTaken = surveyInformation.addSurveyTaken(userId, surveyId, surveyTakenData);
+		return Response.ok()
+				.entity(surveyTaken)
 				.header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
 				.allow("OPTIONS").build();
