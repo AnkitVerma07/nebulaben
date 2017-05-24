@@ -21,8 +21,8 @@ public class UserTesting {
 	private static HelperMethods helpers;
 
 	public static void main(String[] args) {
-	//testInsert();
-	testGet(1);
+	testInsert();
+	//testGet(1);
 		//testUpdate(2);
 		//testGetUserIdByEmail("aakriti@usc.edu");
 		//testGetUserAnalyticsList(1);

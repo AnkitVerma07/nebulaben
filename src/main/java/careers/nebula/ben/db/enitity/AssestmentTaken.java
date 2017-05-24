@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * @author medlclouddev
+ * @author Ankit Verma
  *
  */
 @Entity
@@ -31,12 +31,13 @@ public class AssestmentTaken {
     @Column(name = "id", columnDefinition = "serial")
 	private Integer id;
 	private Double score;
+	private Double time_taken;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "assestmentTaken", cascade = CascadeType.ALL)
-	private Assestment assestment;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "assestmentTakenList", cascade = CascadeType.ALL)
+	private Collection<Assestment> assestmentList = new ArrayList<Assestment>();
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "assestmentTaken", cascade = CascadeType.ALL)
-	private User user;
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "assestmentTakenList", cascade = CascadeType.ALL)
+	private Collection<User> usersList = new ArrayList<User>();
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="assestment_taken_answers",
@@ -44,6 +45,15 @@ public class AssestmentTaken {
 			inverseJoinColumns=@JoinColumn(name="answer_id")
 	)
 	private Collection<Answer> answersList = new ArrayList<Answer>();
+	
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="assestment_taken_location",
+			joinColumns=@JoinColumn(name="assestment_taken_id"), 
+			inverseJoinColumns=@JoinColumn(name="location_id")
+	)
+	private Collection<Locations> locationList = new ArrayList<Locations>();
+	
 
 	public Integer getId() {
 		return id;
@@ -61,20 +71,22 @@ public class AssestmentTaken {
 		this.score = score;
 	}
 
-	public Assestment getAssestment() {
-		return assestment;
+
+
+	public Collection<Assestment> getAssestmentList() {
+		return assestmentList;
 	}
 
-	public void setAssestment(Assestment assestment) {
-		this.assestment = assestment;
+	public void setAssestmentList(Collection<Assestment> assestmentList) {
+		this.assestmentList = assestmentList;
 	}
 
-	public User getUser() {
-		return user;
+	public Collection<User> getUsersList() {
+		return usersList;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsersList(Collection<User> usersList) {
+		this.usersList = usersList;
 	}
 
 	public Collection<Answer> getAnswersList() {
@@ -83,6 +95,22 @@ public class AssestmentTaken {
 
 	public void setAnswersList(Collection<Answer> answersList) {
 		this.answersList = answersList;
+	}
+
+	public Double getTime_taken() {
+		return time_taken;
+	}
+
+	public void setTime_taken(Double time_taken) {
+		this.time_taken = time_taken;
+	}
+
+	public Collection<Locations> getLocationList() {
+		return locationList;
+	}
+
+	public void setLocationList(Collection<Locations> locationList) {
+		this.locationList = locationList;
 	}
 	
 }

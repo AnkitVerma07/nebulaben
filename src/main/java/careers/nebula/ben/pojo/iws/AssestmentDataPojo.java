@@ -1,54 +1,48 @@
 /**
  * 
  */
-package careers.nebula.ben.db.enitity;
+package careers.nebula.ben.pojo.iws;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import careers.nebula.ben.db.enitity.AssestmentTaken;
+import careers.nebula.ben.db.enitity.Question;
+import careers.nebula.ben.db.enitity.SurveyTaken;
 
 /**
- * @author medlclouddev
+ * @author Ankit Verma
  *
  */
-@Entity
-@Table (name = "assestments")
-public class Assestment {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", columnDefinition = "serial")
+@XmlRootElement
+public class AssestmentDataPojo {
+	
 	private Integer id;
 	private String title;
 	private String description;
 	private String source;
 	private Double time_limit;
 	private Double expected_time;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="assest_assestement_taken",
-			joinColumns=@JoinColumn(name="assestment_id"), 
-			inverseJoinColumns=@JoinColumn(name="assestment_taken_id")
-	)
 	private Collection<AssestmentTaken> assestmentTakenList = new ArrayList<AssestmentTaken>();
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="assestment_questions",
-			joinColumns=@JoinColumn(name="assestment_id"), 
-			inverseJoinColumns=@JoinColumn(name="question_id")
-	)
 	private Collection<Question> questionList = new ArrayList<Question>();
+
+	
+	public AssestmentDataPojo() {
+		
+	}
+	
+	public AssestmentDataPojo(Integer id, String title, String description, String source, Double time_limit, Double expected_time, Collection<AssestmentTaken> assestmentTakenList, Collection<Question> questionList) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.source = source;
+		this.time_limit = time_limit;
+		this.expected_time = expected_time;
+		this.assestmentTakenList = assestmentTakenList;
+		this.questionList = questionList;
+	}
 
 	public Integer getId() {
 		return id;
@@ -98,13 +92,6 @@ public class Assestment {
 		this.expected_time = expected_time;
 	}
 
-	public Collection<Question> getQuestionList() {
-		return questionList;
-	}
-
-	public void setQuestionList(Collection<Question> questionList) {
-		this.questionList = questionList;
-	}
 
 	public Collection<AssestmentTaken> getAssestmentTakenList() {
 		return assestmentTakenList;
@@ -112,6 +99,14 @@ public class Assestment {
 
 	public void setAssestmentTakenList(Collection<AssestmentTaken> assestmentTakenList) {
 		this.assestmentTakenList = assestmentTakenList;
+	}
+
+	public Collection<Question> getQuestionList() {
+		return questionList;
+	}
+
+	public void setQuestionList(Collection<Question> questionList) {
+		this.questionList = questionList;
 	}
 	
 	

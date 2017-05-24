@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import careers.nebula.ben.db.enitity.AssestmentTaken;
 import careers.nebula.ben.db.enitity.Companies;
 import careers.nebula.ben.db.enitity.Highschool;
 import careers.nebula.ben.db.enitity.Locations;
@@ -53,6 +55,15 @@ public class LocationRepo {
 		session.beginTransaction();			
 		session.save(location);
 		session.merge(surveyTaken); 
+		session.getTransaction().commit();
+		session.close();
+		session.getSessionFactory().close();
+	   }
+	
+	public void insertAssestmentTakenLocation(AssestmentTaken assestmentTaken, Locations location){
+		session.beginTransaction();			
+		session.save(location);
+		session.merge(assestmentTaken); 
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();

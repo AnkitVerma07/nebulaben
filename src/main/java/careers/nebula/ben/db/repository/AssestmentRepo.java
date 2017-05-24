@@ -8,54 +8,42 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import careers.nebula.ben.db.enitity.Assestment;
-import careers.nebula.ben.db.enitity.Question;
 import careers.nebula.ben.db.enitity.Survey;
 
 /**
  * @author Ankit Verma
  *
  */
-public class QuestionRepo {
+public class AssestmentRepo {
 
-	
 	
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	Session session = sessionFactory.openSession();
 	
-	public void insertQuestion(Survey surveyEntity, Question questionData){
+	public void insertAssestment(Assestment assestmentData){
 				session.beginTransaction();
-				session.save(questionData);
-				session.merge(surveyEntity); 
+				session.save(assestmentData);
 				session.getTransaction().commit();
 				session.close();
 				session.getSessionFactory().close();
 			   }
-	
-	public void insertQuestion(Assestment assestmentEntity, Question questionData){
-		session.beginTransaction();
-		session.save(questionData);
-		session.merge(assestmentEntity); 
-		session.getTransaction().commit();
-		session.close();
-		session.getSessionFactory().close();
-	   }
 
-	public void updateQuestionById(Question questionData){
+	public void updateAssestmentById(Assestment assestmentData){
 		session.beginTransaction();
-		session.merge(questionData);
+		session.merge(assestmentData);
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();
 	}
 	
-	public Question getQuestionById(int questionId){
-				Question questionData = new Question();
+	public Assestment getassestmentById(int assestmentId){
+		Assestment assestmentData = new Assestment();
 				session = sessionFactory.openSession();
 				session.beginTransaction();
-				questionData = (Question)session.get(Question.class, questionId);
+				assestmentData = (Assestment)session.get(Assestment.class, assestmentId);
 				session.close();
 				session.getSessionFactory().close();
-				return questionData;
+				return assestmentData;
 	}
 	
 	

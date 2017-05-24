@@ -83,13 +83,17 @@ public class UserInformationIWS {
 				.allow("OPTIONS").build();
 	}
 
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/updateUser")
 	public Response updateUserInfo (UserDataPojo userData){
 		userInformation = new UserInformation();
-		userInformation.UpdateUserInformation(userData);
-		return Response.status(200).entity("User Updated Successful").build();	
+		User user = userInformation.UpdateUserInformation(userData);
+		return Response.ok()
+				.entity(user)
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();	
 	}
 	
 	@GET

@@ -59,14 +59,17 @@ public class User {
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_survey_taken",
 			joinColumns=@JoinColumn(name="user_id"), 
-			inverseJoinColumns=@JoinColumn(name="survey_taken")
+			inverseJoinColumns=@JoinColumn(name="survey_taken_id")
 	)
 	private Collection<SurveyTaken> surveyTakenList = new ArrayList<SurveyTaken>();
 	
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private AssestmentTaken assestmentTaken;
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="user_assestment_taken",
+			joinColumns=@JoinColumn(name="user_id"), 
+			inverseJoinColumns=@JoinColumn(name="assestment_taken_id")
+	)
+	private Collection<AssestmentTaken> assestmentTakenList = new ArrayList<AssestmentTaken>();
+
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="user_locations",
@@ -482,11 +485,11 @@ public class User {
 	public void setSurveyTakenList(Collection<SurveyTaken> surveyTakenList) {
 		this.surveyTakenList = surveyTakenList;
 	}
-	public AssestmentTaken getAssestmentTaken() {
-		return assestmentTaken;
+	public Collection<AssestmentTaken> getAssestmentTakenList() {
+		return assestmentTakenList;
 	}
-	public void setAssestmentTaken(AssestmentTaken assestmentTaken) {
-		this.assestmentTaken = assestmentTaken;
+	public void setAssestmentTakenList(Collection<AssestmentTaken> assestmentTakenList) {
+		this.assestmentTakenList = assestmentTakenList;
 	}
 
 	

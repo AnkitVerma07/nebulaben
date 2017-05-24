@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import careers.nebula.ben.db.enitity.Answer;
+import careers.nebula.ben.db.enitity.Assestment;
 import careers.nebula.ben.db.enitity.AssestmentTaken;
 import careers.nebula.ben.db.enitity.Survey;
 import careers.nebula.ben.db.enitity.SurveyTaken;
@@ -17,51 +17,44 @@ import careers.nebula.ben.db.enitity.User;
  * @author Ankit Verma
  *
  */
-public class AnswerRepo {
+public class AssestmentTakenRepo {
+	
 	SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 	Session session = sessionFactory.openSession();
 	
-	public void insertAnswer(Answer answerData){
+	public void insertAssestmentTaken(AssestmentTaken assestmentData){
 				session.beginTransaction();
-				session.save(answerData);
+				session.save(assestmentData);
 				session.getTransaction().commit();
 				session.close();
 				session.getSessionFactory().close();
 			   }
 	
-	public void insertAnswer(Answer answerData, SurveyTaken surveyTakenData){
+	public void insertAssestmentTaken(AssestmentTaken assestmentTakenData, User userData, Assestment assestmentData){
 		session.beginTransaction();
-		session.save(answerData);
-		session.merge(surveyTakenData);
-		session.getTransaction().commit();
-		session.close();
-		session.getSessionFactory().close();
-	   }
-	
-	public void insertAnswer(Answer answerData, AssestmentTaken assestmentTakenData){
-		session.beginTransaction();
-		session.save(answerData);
-		session.merge(assestmentTakenData);
+		session.save(assestmentTakenData);
+		session.merge(assestmentData);
+		session.merge(assestmentTakenData);		
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();
 	   }
 
-	public void updateAnswerTakenById(Answer answerData){
+	public void updateAssestmentTakenById(AssestmentTaken assestmentData){
 		session.beginTransaction();
-		session.merge(answerData);
+		session.merge(assestmentData);
 		session.getTransaction().commit();
 		session.close();
 		session.getSessionFactory().close();
 	}
 	
-	public Answer getAnswerById(int answerId){
-				Answer answerData = new Answer();
+	public AssestmentTaken getAssestmentTakenById(int assestmentId){
+		AssestmentTaken assestmentData = new AssestmentTaken();
 				session = sessionFactory.openSession();
 				session.beginTransaction();
-				answerData = (Answer)session.get(Answer.class, answerId);
+				assestmentData = (AssestmentTaken)session.get(AssestmentTaken.class, assestmentId);
 				session.close();
 				session.getSessionFactory().close();
-				return answerData;
+				return assestmentData;
 	}
 }

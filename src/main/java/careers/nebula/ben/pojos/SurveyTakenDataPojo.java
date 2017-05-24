@@ -18,6 +18,7 @@ import careers.nebula.ben.pojo.iws.QuestionDataPojo;
 public class SurveyTakenDataPojo {
 		
 	private Double time_taken;
+	private Double score;
 	private String street_address1;
 	private String street_address2;
 	private String city;
@@ -31,8 +32,9 @@ public class SurveyTakenDataPojo {
 		
 	}
 	
-	public SurveyTakenDataPojo( Double time_taken,String city, String state, String zipcode, String country, String street_address1, String street_address2, List<IntegerStringDataPojo> answersList) {
+	public SurveyTakenDataPojo(	 Double score, Double time_taken,String city, String state, String zipcode, String country, String street_address1, String street_address2, List<IntegerStringDataPojo> answersList) {
 		this.time_taken = time_taken;
+		this.score = score;
 		this.street_address1 = street_address1;
 		this.street_address2 = street_address2;
 		this.city = city;
@@ -104,6 +106,14 @@ public class SurveyTakenDataPojo {
 
 	public void setAnswersList(List<IntegerStringDataPojo> answersList) {
 		this.answersList = answersList;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
 	}
 	
 	
