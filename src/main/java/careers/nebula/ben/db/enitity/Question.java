@@ -29,8 +29,10 @@ public class Question {
     @Column(name = "id", columnDefinition = "serial")
 	private Integer id;
 	private String question;
-	private String type;  //positive or negative
+	private String type;  
 	private ArrayList<String> choices;
+	private String cluster;
+	private Boolean charge;//positive or negative
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "questionList", cascade = CascadeType.ALL)
 	private Collection<Answer> answersList = new ArrayList<Answer>();
@@ -106,6 +108,22 @@ public class Question {
 
 	public void setAssestmentList(Collection<Assestment> assestmentList) {
 		this.assestmentList = assestmentList;
+	}
+
+	public String getCluster() {
+		return cluster;
+	}
+
+	public void setCluster(String cluster) {
+		this.cluster = cluster;
+	}
+
+	public Boolean getCharge() {
+		return charge;
+	}
+
+	public void setCharge(Boolean charge) {
+		this.charge = charge;
 	}
 
 	

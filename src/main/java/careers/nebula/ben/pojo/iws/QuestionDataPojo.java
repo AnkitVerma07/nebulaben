@@ -27,15 +27,19 @@ public class QuestionDataPojo {
 	private Collection<Answer> answersList = new ArrayList<Answer>();
 	private Collection<Survey> surveyList = new ArrayList<Survey>();
 	private Collection<Assestment> assestmentList = new ArrayList<Assestment>();
+	private String cluster;
+	private Boolean charge;//positive or negative
 
 	
 	public QuestionDataPojo(){
 		
 	}
 	
-	public QuestionDataPojo(Integer id, String question, String type, Collection<Interview> interviewList, ArrayList<String> choices, Collection<Answer> answersList, Collection<Survey> surveyList, Collection<Assestment> assestmentList){
+	public QuestionDataPojo(Integer id, String question, String cluster, Boolean charge, String type, Collection<Interview> interviewList, ArrayList<String> choices, Collection<Answer> answersList, Collection<Survey> surveyList, Collection<Assestment> assestmentList){
 		this.id = id;
 		this.question = question;
+		this.cluster = cluster;
+		this.charge = charge;
 		this.type = type;
 		this.interviewList = interviewList;
 		this.choices = choices;
@@ -106,6 +110,22 @@ public class QuestionDataPojo {
 
 	public void setAssestmentList(Collection<Assestment> assestmentList) {
 		this.assestmentList = assestmentList;
+	}
+
+	public String getCluster() {
+		return cluster;
+	}
+
+	public void setCluster(String cluster) {
+		this.cluster = cluster;
+	}
+
+	public Boolean getCharge() {
+		return charge;
+	}
+
+	public void setCharge(Boolean charge) {
+		this.charge = charge;
 	}
 
 

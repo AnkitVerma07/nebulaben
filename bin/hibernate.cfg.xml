@@ -19,13 +19,13 @@
         <property name="hibernate.connection.password">madison91</property>     -->
    	       <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</property>  
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">ank17it</property>   
+        <property name="hibernate.connection.password">ankit</property>   
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
        	<!-- <property name="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
        	<property name="hibernate.show_sql">true</property>
-       	<property name="hibernate.hbm2ddl.auto">update</property>
+       	<property name="hibernate.hbm2ddl.auto">create</property>
        	<!-- all the entity classes -->
        	<mapping class="careers.nebula.ben.db.enitity.User"/>
        	<mapping class="careers.nebula.ben.db.enitity.Locations"/>

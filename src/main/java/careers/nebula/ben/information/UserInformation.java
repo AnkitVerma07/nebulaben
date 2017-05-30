@@ -96,6 +96,7 @@ public class UserInformation {
 		userpojo.setPersonalWebsiteUrl(userEntity.getPersonalWebsiteUrl());
 		userpojo.setHighestQualification(userEntity.getHighestQualification());
 		userpojo.setGender(userEntity.getGender());
+		userpojo.setHashed_password(userEntity.getHashed_password());
 		return userpojo;
 	}
 	

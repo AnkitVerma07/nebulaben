@@ -3,6 +3,8 @@
  */
 package careers.nebula.ben.information;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import careers.nebula.ben.db.enitity.Answer;
@@ -43,6 +45,7 @@ public class AssestmentInformation {
 	private LocationRepo locationRepo;
 	private QuestionRepo questionRepo;
 	private AssestmentDataPojo assestmentPojo;
+	private QuestionDataPojo questionPojo;
 	private AssestmentTaken assestmentTakenEntity;
 	private AssestmentTakenRepo assestmentTakenRepo;
 	private UserRepo userRepo;
@@ -73,7 +76,16 @@ public class AssestmentInformation {
 		assestmentPojo.setSource(assestmentEntity.getSource());
 		assestmentPojo.setTime_limit(assestmentEntity.getTime_limit());
 		assestmentPojo.setExpected_time(assestmentEntity.getExpected_time());
-		assestmentPojo.setQuestionList(assestmentEntity.getQuestionList());
+		Collection<Question> questionList = assestmentEntity.getQuestionList();
+		Collection<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();
+		for( Question q : questionList){
+			questionPojo = new QuestionDataPojo();
+			questionPojo.setId(q.getId());
+			questionPojo.setQuestion(q.getQuestion());
+			questionPojo.setType(q.getType());
+			questionPojoList.add(questionPojo);
+		}
+		assestmentPojo.setQuestionList(questionPojoList);
 		return assestmentPojo;
 	}
 	
@@ -160,6 +172,7 @@ public class AssestmentInformation {
 			questionEntity = new Question();
 			questionRepo = new QuestionRepo();
 			questionEntity = questionRepo.getQuestionById(twoStringPojo.getI());
+			answerEntity = new Answer();
 			answerEntity.setText(twoStringPojo.getS());
 			answerEntity.getQuestionList().add(questionEntity);
 			assestmentTakenEntity.getAnswersList().add(answerEntity);
