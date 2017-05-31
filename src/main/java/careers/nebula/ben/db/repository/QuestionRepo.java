@@ -39,6 +39,14 @@ public class QuestionRepo {
 		session.close();
 		session.getSessionFactory().close();
 	   }
+	
+	public void insertQuestion(Question questionData){
+		session.beginTransaction();
+		session.save(questionData);
+		session.getTransaction().commit();
+		session.close();
+		session.getSessionFactory().close();
+	   }
 
 	public void updateQuestionById(Question questionData){
 		session.beginTransaction();

@@ -138,10 +138,14 @@ public class AssestmentInformation {
 			questionEntity.setQuestion(questionPojo.getQuestion());
 			questionEntity.setType(questionPojo.getType());
 			questionEntity.setChoices(questionPojo.getChoices());
-			assestmentEntity.getQuestionList().add(questionEntity);
+			questionEntity.setCluster(questionPojo.getCluster());
+			questionEntity.setCharge(questionPojo.getCharge());
 			questionRepo = new QuestionRepo();
-			questionRepo.insertQuestion(assestmentEntity, questionEntity);
+			questionRepo.insertQuestion(questionEntity);
+			assestmentEntity.getQuestionList().add(questionEntity);
 		}
+		assestmentRepo = new AssestmentRepo();
+		assestmentRepo.updateAssestmentById(assestmentEntity);
 		return returnObject;
 	}
 	

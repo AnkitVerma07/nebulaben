@@ -77,8 +77,8 @@ public class AssestmentIWS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/insertQuestions/{surveyId}")
-	public Response insertSurveyQuestions (@PathParam("surveyId") int id, QuestionArrayDataPojo questionsArray){
+	@Path("/insertQuestions/{assestmentId}")
+	public Response insertSurveyQuestions (@PathParam("assestmentId") int id, QuestionArrayDataPojo questionsArray){
 		assestmentInformation = new AssestmentInformation();
 		QuestionArrayDataPojo questionsAdded = assestmentInformation.addAssestmentQuestions(id, questionsArray);
 		return Response.ok()
