@@ -22,14 +22,14 @@ public class SurveyDataPojo {
 	private Double time_limit;
 	private Double expected_time;
 	private Collection<SurveyTaken> surveyTakenList = new ArrayList<SurveyTaken>();
-	private Collection<Question> questionList = new ArrayList<Question>();
+	private Collection<QuestionDataPojo> questionList = new ArrayList<QuestionDataPojo>();
 
 	
 	public SurveyDataPojo() {
 		
 	}
 	
-	public SurveyDataPojo(Integer id, String title, String description, String source, Double time_limit, Double expected_time, Collection<SurveyTaken> surveyTakenList, Collection<Question> questionList) {
+	public SurveyDataPojo(Integer id, String title, String description, String source, Double time_limit, Double expected_time, Collection<SurveyTaken> surveyTakenList, Collection<QuestionDataPojo> questionList) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -98,11 +98,11 @@ public class SurveyDataPojo {
 		this.surveyTakenList = surveyTakenList;
 	}
 
-	public Collection<Question> getQuestionList() {
+	public Collection<QuestionDataPojo> getQuestionList() {
 		return questionList;
 	}
 
-	public void setQuestionList(Collection<Question> questionList) {
+	public void setQuestionList(Collection<QuestionDataPojo> questionList) {
 		this.questionList = questionList;
 	}
 	

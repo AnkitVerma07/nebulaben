@@ -83,6 +83,7 @@ public class AssestmentInformation {
 			questionPojo.setId(q.getId());
 			questionPojo.setQuestion(q.getQuestion());
 			questionPojo.setType(q.getType());
+			questionPojo.setChoices(q.getChoices());
 			questionPojoList.add(questionPojo);
 		}
 		assestmentPojo.setQuestionList(questionPojoList);

@@ -3,6 +3,8 @@
  */
 package careers.nebula.ben.information;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import careers.nebula.ben.db.enitity.Answer;
@@ -12,6 +14,7 @@ import careers.nebula.ben.db.enitity.Survey;
 import careers.nebula.ben.db.enitity.SurveyTaken;
 import careers.nebula.ben.db.enitity.User;
 import careers.nebula.ben.db.repository.AnswerRepo;
+import careers.nebula.ben.db.repository.AssestmentRepo;
 import careers.nebula.ben.db.repository.LocationRepo;
 import careers.nebula.ben.db.repository.QuestionRepo;
 import careers.nebula.ben.db.repository.SurveyRepo;
@@ -45,6 +48,7 @@ public class SurveyInformation {
 	private User userEntity;
 	private Answer answerEntity;
 	private AnswerRepo answerRepo;
+	private QuestionDataPojo questionPojo;
 	
 	public Survey addSurvey(SurveyDataPojo surveyData){	
 		surveyEntity = new Survey();
@@ -69,7 +73,17 @@ public class SurveyInformation {
 		surveyPojo.setSource(surveyEntity.getSource());
 		surveyPojo.setTime_limit(surveyEntity.getTime_limit());
 		surveyPojo.setExpected_time(surveyEntity.getExpected_time());
-		surveyPojo.setQuestionList(surveyEntity.getQuestionList());
+		Collection<Question> questionList = surveyEntity.getQuestionList();
+		Collection<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();
+		for( Question q : questionList){
+			questionPojo = new QuestionDataPojo();
+			questionPojo.setId(q.getId());
+			questionPojo.setQuestion(q.getQuestion());
+			questionPojo.setType(q.getType());
+			questionPojo.setChoices(q.getChoices());
+			questionPojoList.add(questionPojo);
+		}
+		surveyPojo.setQuestionList(questionPojoList);
 		return surveyPojo;
 	}
 	
@@ -123,10 +137,12 @@ public class SurveyInformation {
 			questionEntity.setQuestion(questionPojo.getQuestion());
 			questionEntity.setType(questionPojo.getType());
 			questionEntity.setChoices(questionPojo.getChoices());
-			surveyEntity.getQuestionList().add(questionEntity);
 			questionRepo = new QuestionRepo();
-			questionRepo.insertQuestion(surveyEntity, questionEntity);
+			questionRepo.insertQuestion(questionEntity);
+			surveyEntity.getQuestionList().add(questionEntity);
 		}
+		surveyRepo = new SurveyRepo();
+		surveyRepo.updateSurveyById(surveyEntity);
 		return returnObject;
 	}
 	
