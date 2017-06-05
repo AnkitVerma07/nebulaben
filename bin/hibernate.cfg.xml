@@ -14,12 +14,12 @@
 
 <hibernate-configuration>
     <session-factory>
-   <!--    <property name="hibernate.connection.url">jdbc:postgresql://104.197.117.35:5432/dan</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://104.197.117.35:5432/dan</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">madison91</property>     -->  
-   	        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</property>  
+        <property name="hibernate.connection.password">madison91</property>     
+   	  <!--         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/testdb</property>  
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">ank17it</property> 
+        <property name="hibernate.connection.password">ank17it</property>  --> 
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.pool_size">1</property>
         <property name="hibernate.connection.dialect">org.hibernate.dialect.PostgreSQLDialect</property>

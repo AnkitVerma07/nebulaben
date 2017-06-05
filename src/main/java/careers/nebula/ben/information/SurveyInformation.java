@@ -5,6 +5,8 @@ package careers.nebula.ben.information;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import careers.nebula.ben.db.enitity.Answer;
@@ -73,16 +75,47 @@ public class SurveyInformation {
 		surveyPojo.setSource(surveyEntity.getSource());
 		surveyPojo.setTime_limit(surveyEntity.getTime_limit());
 		surveyPojo.setExpected_time(surveyEntity.getExpected_time());
-		Collection<Question> questionList = surveyEntity.getQuestionList();
-		Collection<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();
+		List<Question> questionList = (List<Question>) surveyEntity.getQuestionList();
+		List<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();		
+		List<String> questionClusterList = new ArrayList<String>();
+		questionClusterList.add("demographic");
+		questionClusterList.add("NPS");
+		questionClusterList.add("careerProgression");
+		questionClusterList.add("resourcesNtraining");
+		questionClusterList.add("team");
+		questionClusterList.add("culture");
+		questionClusterList.add("ethicsNvaluesNdiversity");
+		questionClusterList.add("recognitionNsenseOfInfluence");
+		questionClusterList.add("communication");
+		questionClusterList.add("tenure");
+		questionClusterList.add("clarity");
+		questionClusterList.add("work");
+		questionClusterList.add("process");
+		questionClusterList.add("organization");
+		questionClusterList.add("department");
+		questionClusterList.add("job");
+		questionClusterList.add("rapport");
+		questionClusterList.add("overall");
 		for( Question q : questionList){
 			questionPojo = new QuestionDataPojo();
 			questionPojo.setId(q.getId());
 			questionPojo.setQuestion(q.getQuestion());
 			questionPojo.setType(q.getType());
+			questionPojo.setCharge(q.getCharge());
+			questionPojo.setCluster(q.getCluster());
 			questionPojo.setChoices(q.getChoices());
 			questionPojoList.add(questionPojo);
 		}
+		Collections.sort(questionPojoList, new Comparator<QuestionDataPojo>(){
+		       public int compare(QuestionDataPojo q1, QuestionDataPojo q2){
+		          return questionClusterList.indexOf(q1.getCluster()) - questionClusterList.indexOf(q2.getCluster());
+		       }
+		    });
+		Collections.sort(questionPojoList, new Comparator<QuestionDataPojo>(){
+		       public int compare(QuestionDataPojo q1, QuestionDataPojo q2){
+		          return q1.getId().compareTo(q2.getId());
+		       }
+		    });
 		surveyPojo.setQuestionList(questionPojoList);
 		return surveyPojo;
 	}
@@ -136,6 +169,8 @@ public class SurveyInformation {
 			questionEntity = new Question();
 			questionEntity.setQuestion(questionPojo.getQuestion());
 			questionEntity.setType(questionPojo.getType());
+			questionEntity.setCharge(questionPojo.getCharge());
+			questionEntity.setCluster(questionPojo.getCluster());
 			questionEntity.setChoices(questionPojo.getChoices());
 			questionRepo = new QuestionRepo();
 			questionRepo.insertQuestion(questionEntity);
