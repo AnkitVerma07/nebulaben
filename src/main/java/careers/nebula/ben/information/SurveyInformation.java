@@ -192,31 +192,29 @@ public class SurveyInformation {
 		surveyTakenEntity.setTime_taken(surveyTakenData.getTime_taken());
 		userEntity.getSurveyTakenList().add(surveyTakenEntity);
 		surveyEntity.getSurveyTakenList().add(surveyTakenEntity);
-		surveyTakenRepo = new SurveyTakenRepo();
-		surveyTakenRepo.insertSurveyTaken(surveyTakenEntity,userEntity, surveyEntity);
-		locationEntity = new Locations();
-		locationEntity.setStreet_address1(surveyTakenData.getStreet_address1());
-		locationEntity.setStreet_address2(surveyTakenData.getStreet_address2());
-		locationEntity.setCity(surveyTakenData.getCity());
-		locationEntity.setCountry(surveyTakenData.getCountry());
-		locationEntity.setState(surveyTakenData.getState());
-		locationEntity.setZipcode(surveyTakenData.getZipcode());
-		surveyTakenEntity.getLocationList().add(locationEntity);
-		locationRepo = new LocationRepo();
-		locationRepo.insertSurveyTakenLocation(surveyTakenEntity, locationEntity);
+//		locationEntity = new Locations();
+//		locationEntity.setStreet_address1(surveyTakenData.getStreet_address1());
+//		locationEntity.setStreet_address2(surveyTakenData.getStreet_address2());
+//		locationEntity.setCity(surveyTakenData.getCity());
+//		locationEntity.setCountry(surveyTakenData.getCountry());
+//		locationEntity.setState(surveyTakenData.getState());
+//		locationEntity.setZipcode(surveyTakenData.getZipcode());
+//		surveyTakenEntity.getLocationList().add(locationEntity);
+//		locationRepo = new LocationRepo();
+//		locationRepo.insertSurveyTakenLocation(surveyTakenEntity, locationEntity);
 		for(IntegerStringDataPojo twoStringPojo: surveyTakenData.getAnswersList()){
 			questionEntity = new Question();
 			questionRepo = new QuestionRepo();
 			questionEntity = questionRepo.getQuestionById(twoStringPojo.getI());
+			answerEntity = new Answer();
 			answerEntity.setText(twoStringPojo.getS());
 			answerEntity.getQuestionList().add(questionEntity);
 			surveyTakenEntity.getAnswersList().add(answerEntity);
 			answerRepo = new AnswerRepo();
-			answerRepo.insertAnswer(answerEntity, surveyTakenEntity);
+			answerRepo.insertAnswer(answerEntity);
 		}
-		surveyTakenEntity = new SurveyTaken();
 		surveyTakenRepo = new SurveyTakenRepo();
-		surveyTakenEntity = surveyTakenRepo.getSurveyTakenById(surveyId);
+		surveyTakenRepo.insertSurveyTaken(surveyTakenEntity,userEntity, surveyEntity);
 		return surveyTakenEntity;
 	}
 	
