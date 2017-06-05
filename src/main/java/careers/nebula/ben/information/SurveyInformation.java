@@ -75,14 +75,217 @@ public class SurveyInformation {
 		surveyPojo.setExpected_time(surveyEntity.getExpected_time());
 		Collection<Question> questionList = surveyEntity.getQuestionList();
 		Collection<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> careerProgressionList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> resourcesNtrainingList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> demographicList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> cultureList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> compensationNbenefitsList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> ethicsNvaluesNdiversityList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> recognitionNsenseOfInfluenceList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> communicationList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> tenureList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> clarityList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> workList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> processList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> organizationList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> departmentList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> jobList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> rapportList = new ArrayList<QuestionDataPojo>();
+		Collection<QuestionDataPojo> overallList = new ArrayList<QuestionDataPojo>();
+
 		for( Question q : questionList){
+//			if(q.getCluster().equals("demographic")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				demographicList.add(questionPojo);
+//			}else if(q.getCluster().equals("careerProgression")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				careerProgressionList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("resourcesNtraining")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				resourcesNtrainingList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("culture")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				cultureList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("compensationNbenefits")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				compensationNbenefitsList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("ethicsNvaluesNdiversity")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				ethicsNvaluesNdiversityList.add(questionPojo);
+//			}  else 	if(q.getCluster().equals("recognitionNsenseOfInfluence")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				recognitionNsenseOfInfluenceList.add(questionPojo);
+//			}  else 	if(q.getCluster().equals("communication")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				communicationList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("tenure")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				tenureList.add(questionPojo);
+//			}  else 	if(q.getCluster().equals("clarity")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				clarityList.add(questionPojo);
+//			}  else 	if(q.getCluster().equals("work")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				workList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("process")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				processList.add(questionPojo);
+//			}  else 	if(q.getCluster().equals("organization")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				organizationList.add(questionPojo);
+//			} else 	if(q.getCluster().equals("department")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				departmentList.add(questionPojo);
+//			}else 	if(q.getCluster().equals("job")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				jobList.add(questionPojo);
+//			} 
+//			else 	if(q.getCluster().equals("rapport")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				rapportList.add(questionPojo);
+//			}
+//			else 	if(q.getCluster().equals("overall")){
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				overallList.add(questionPojo);
+//			} else {
+//				questionPojo = new QuestionDataPojo();
+//				questionPojo.setId(q.getId());
+//				questionPojo.setQuestion(q.getQuestion());
+//				questionPojo.setType(q.getType());
+//				questionPojo.setCluster(q.getCluster());
+//				questionPojo.setCharge(q.getCharge());
+//				questionPojo.setChoices(q.getChoices());
+//				questionPojoList.add(questionPojo);	
+//			}
 			questionPojo = new QuestionDataPojo();
 			questionPojo.setId(q.getId());
 			questionPojo.setQuestion(q.getQuestion());
 			questionPojo.setType(q.getType());
+			questionPojo.setCluster(q.getCluster());
+			questionPojo.setCharge(q.getCharge());
 			questionPojo.setChoices(q.getChoices());
-			questionPojoList.add(questionPojo);
+			questionPojoList.add(questionPojo);	
 		}
+//		questionPojoList.addAll(demographicList);
+//		questionPojoList.addAll(careerProgressionList);
+//		questionPojoList.addAll(resourcesNtrainingList);
+//		questionPojoList.addAll(cultureList);
+//		questionPojoList.addAll(compensationNbenefitsList);
+//		questionPojoList.addAll(ethicsNvaluesNdiversityList);
+//		questionPojoList.addAll(recognitionNsenseOfInfluenceList);
+//		questionPojoList.addAll(communicationList);
+//		questionPojoList.addAll(tenureList);
+//		questionPojoList.addAll(clarityList);
+//		questionPojoList.addAll(workList);
+//		questionPojoList.addAll(processList);
+//		questionPojoList.addAll(organizationList);
+//		questionPojoList.addAll(departmentList);
+//		questionPojoList.addAll(jobList);
+//		questionPojoList.addAll(rapportList);
+//		questionPojoList.addAll(overallList);
+		
 		surveyPojo.setQuestionList(questionPojoList);
 		return surveyPojo;
 	}
@@ -137,6 +340,8 @@ public class SurveyInformation {
 			questionEntity.setQuestion(questionPojo.getQuestion());
 			questionEntity.setType(questionPojo.getType());
 			questionEntity.setChoices(questionPojo.getChoices());
+			questionEntity.setCluster(questionPojo.getCluster());
+			questionEntity.setCharge(questionPojo.getCharge());
 			questionRepo = new QuestionRepo();
 			questionRepo.insertQuestion(questionEntity);
 			surveyEntity.getQuestionList().add(questionEntity);
