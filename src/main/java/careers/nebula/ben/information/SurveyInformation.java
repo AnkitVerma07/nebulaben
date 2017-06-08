@@ -5,6 +5,8 @@ package careers.nebula.ben.information;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import careers.nebula.ben.db.enitity.Answer;
@@ -93,6 +95,27 @@ public class SurveyInformation {
 		Collection<QuestionDataPojo> rapportList = new ArrayList<QuestionDataPojo>();
 		Collection<QuestionDataPojo> overallList = new ArrayList<QuestionDataPojo>();
 
+		List<Question> questionList = (List<Question>) surveyEntity.getQuestionList();
+		List<QuestionDataPojo> questionPojoList = new ArrayList<QuestionDataPojo>();		
+		List<String> questionClusterList = new ArrayList<String>();
+		questionClusterList.add("demographic");
+		questionClusterList.add("NPS");
+		questionClusterList.add("careerProgression");
+		questionClusterList.add("resourcesNtraining");
+		questionClusterList.add("team");
+		questionClusterList.add("culture");
+		questionClusterList.add("ethicsNvaluesNdiversity");
+		questionClusterList.add("recognitionNsenseOfInfluence");
+		questionClusterList.add("communication");
+		questionClusterList.add("tenure");
+		questionClusterList.add("clarity");
+		questionClusterList.add("work");
+		questionClusterList.add("process");
+		questionClusterList.add("organization");
+		questionClusterList.add("department");
+		questionClusterList.add("job");
+		questionClusterList.add("rapport");
+		questionClusterList.add("overall");
 		for( Question q : questionList){
 //			if(q.getCluster().equals("demographic")){
 //				questionPojo = new QuestionDataPojo();
@@ -263,11 +286,17 @@ public class SurveyInformation {
 			questionPojo.setId(q.getId());
 			questionPojo.setQuestion(q.getQuestion());
 			questionPojo.setType(q.getType());
+
 			questionPojo.setCluster(q.getCluster());
 			questionPojo.setCharge(q.getCharge());
+
+			questionPojo.setCharge(q.getCharge());
+			questionPojo.setCluster(q.getCluster());
+
 			questionPojo.setChoices(q.getChoices());
 			questionPojoList.add(questionPojo);	
 		}
+
 //		questionPojoList.addAll(demographicList);
 //		questionPojoList.addAll(careerProgressionList);
 //		questionPojoList.addAll(resourcesNtrainingList);
@@ -286,6 +315,18 @@ public class SurveyInformation {
 //		questionPojoList.addAll(rapportList);
 //		questionPojoList.addAll(overallList);
 		
+
+		Collections.sort(questionPojoList, new Comparator<QuestionDataPojo>(){
+		       public int compare(QuestionDataPojo q1, QuestionDataPojo q2){
+		          return questionClusterList.indexOf(q1.getCluster()) - questionClusterList.indexOf(q2.getCluster());
+		       }
+		    });
+		Collections.sort(questionPojoList, new Comparator<QuestionDataPojo>(){
+		       public int compare(QuestionDataPojo q1, QuestionDataPojo q2){
+		          return q1.getId().compareTo(q2.getId());
+		       }
+		    });
+
 		surveyPojo.setQuestionList(questionPojoList);
 		return surveyPojo;
 	}
@@ -339,6 +380,8 @@ public class SurveyInformation {
 			questionEntity = new Question();
 			questionEntity.setQuestion(questionPojo.getQuestion());
 			questionEntity.setType(questionPojo.getType());
+			questionEntity.setCharge(questionPojo.getCharge());
+			questionEntity.setCluster(questionPojo.getCluster());
 			questionEntity.setChoices(questionPojo.getChoices());
 			questionEntity.setCluster(questionPojo.getCluster());
 			questionEntity.setCharge(questionPojo.getCharge());
@@ -362,31 +405,29 @@ public class SurveyInformation {
 		surveyTakenEntity.setTime_taken(surveyTakenData.getTime_taken());
 		userEntity.getSurveyTakenList().add(surveyTakenEntity);
 		surveyEntity.getSurveyTakenList().add(surveyTakenEntity);
-		surveyTakenRepo = new SurveyTakenRepo();
-		surveyTakenRepo.insertSurveyTaken(surveyTakenEntity,userEntity, surveyEntity);
-		locationEntity = new Locations();
-		locationEntity.setStreet_address1(surveyTakenData.getStreet_address1());
-		locationEntity.setStreet_address2(surveyTakenData.getStreet_address2());
-		locationEntity.setCity(surveyTakenData.getCity());
-		locationEntity.setCountry(surveyTakenData.getCountry());
-		locationEntity.setState(surveyTakenData.getState());
-		locationEntity.setZipcode(surveyTakenData.getZipcode());
-		surveyTakenEntity.getLocationList().add(locationEntity);
-		locationRepo = new LocationRepo();
-		locationRepo.insertSurveyTakenLocation(surveyTakenEntity, locationEntity);
+//		locationEntity = new Locations();
+//		locationEntity.setStreet_address1(surveyTakenData.getStreet_address1());
+//		locationEntity.setStreet_address2(surveyTakenData.getStreet_address2());
+//		locationEntity.setCity(surveyTakenData.getCity());
+//		locationEntity.setCountry(surveyTakenData.getCountry());
+//		locationEntity.setState(surveyTakenData.getState());
+//		locationEntity.setZipcode(surveyTakenData.getZipcode());
+//		surveyTakenEntity.getLocationList().add(locationEntity);
+//		locationRepo = new LocationRepo();
+//		locationRepo.insertSurveyTakenLocation(surveyTakenEntity, locationEntity);
 		for(IntegerStringDataPojo twoStringPojo: surveyTakenData.getAnswersList()){
 			questionEntity = new Question();
 			questionRepo = new QuestionRepo();
 			questionEntity = questionRepo.getQuestionById(twoStringPojo.getI());
+			answerEntity = new Answer();
 			answerEntity.setText(twoStringPojo.getS());
 			answerEntity.getQuestionList().add(questionEntity);
 			surveyTakenEntity.getAnswersList().add(answerEntity);
 			answerRepo = new AnswerRepo();
-			answerRepo.insertAnswer(answerEntity, surveyTakenEntity);
+			answerRepo.insertAnswer(answerEntity);
 		}
-		surveyTakenEntity = new SurveyTaken();
 		surveyTakenRepo = new SurveyTakenRepo();
-		surveyTakenEntity = surveyTakenRepo.getSurveyTakenById(surveyId);
+		surveyTakenRepo.insertSurveyTaken(surveyTakenEntity,userEntity, surveyEntity);
 		return surveyTakenEntity;
 	}
 	
